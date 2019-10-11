@@ -74,15 +74,24 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
 	public void onCalculateBrocaIndexClicked(float index) {
 		resultFragment.setInformation(String.format("Your ideal weight is %.2f kg", index));
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.fragment_container, resultFragment)
+				.replace(R.id.fragment_container, resultFragment, "BROCA_INDEX")
 				.commit();
 	}
 
 	@Override
-	public void onTryAgainButtonClicked(String tag) {
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.fragment_container, brocaIndexFragment)
-				.commit();
+	public void onTryAgainButtonClicked(String tag)
+	{
+		if (tag.equals("BROCA_INDEX")){
+			getSupportFragmentManager().beginTransaction()
+					.replace(R.id.fragment_container, brocaIndexFragment)
+					.commit();
+		}
+		else
+		{
+			getSupportFragmentManager().beginTransaction()
+					.replace(R.id.fragment_container, bodyMassIndexFragment)
+					.commit();
+		}
 	}
 
 	@Override
